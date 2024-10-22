@@ -9,4 +9,4 @@ public class SinabroApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SinabroApplication.class, args);
 	}
-
+}
