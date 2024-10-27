@@ -1,0 +1,56 @@
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          time_zone : Asia/Seoul
+        format_sql: true
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${DB_NAME}?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maxLifetime: 580000
+      maximum-pool-size: 20
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+swagger:
+  version: ${SWAGGER_VERSION:0.0.1}
+springdoc:
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  swagger-ui:
+    path: /api-docs
+    disable-swagger-default-url: true
+    display-request-duration: true
+    tags-sorter: alpha
+    operations-sorter: alpha
+    syntax-highlight:
+      theme: none
+    urls-primary-name: SINABRO API DOCS
+
+logging:
+  level:
+    org:
+      springframework:
+        security: trace
+        web: DEBUG
+      hibernate:
+        orm:
+          jdbc:
+            bind: trace
