@@ -30,6 +30,7 @@ public class SurveyService {
 	private final SurveyRepository surveyRepository;
 	private final SubmitterRepository submitterRepository;
 	private final CreatorRepository creatorRepository;
+	private static final String baseUrl = "https://front-psi-two-39.vercel.app/";
 
 	public SurveyResponse createSurvey(SurveyRequest surveyRequest) {
 		Survey survey = Survey.builder()
@@ -52,7 +53,7 @@ public class SurveyService {
 	}
 
 	private String generateSurveyUrl() {
-		return UUID.randomUUID().toString().replace("-", "").substring(0, 5); // 5자리 문자열
+		return baseUrl + UUID.randomUUID().toString().replace("-", "").substring(0, 5); // 5자리 문자열
 	}
 
 	public SurveyRequest getSurveyAnswers(String uuid) {
