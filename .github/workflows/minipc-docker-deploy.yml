@@ -69,4 +69,3 @@ jobs:
             cd $REMOTE_DIR
             unzip -o sinabro-app.zip
             ./minipc-docker-deploy.sh
-            
