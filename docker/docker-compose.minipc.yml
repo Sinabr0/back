@@ -1,0 +1,14 @@
+version: '3'
+services:
+  animal-meeting-app:
+    image: sinabro-app:latest
+    container_name: sinabro-container
+    networks:
+      - pricewagon-network
+    ports:
+      - "8090:8090"
+    build:
+      context: .
+networks:
+  pricewagon-network:
+    external: true  # 이미 존재하는 네트워크를 사용
