@@ -1,4 +1,13 @@
 package com.sinabro.sinabro.entity.response;
 
-public class SurveyResponse {
+import com.sinabro.sinabro.entity.Survey;
+
+public record SurveyResponse(
+	String url
+) {
+	public static SurveyResponse from(Survey survey) {
+		return new SurveyResponse(
+			survey.getUrl()
+		);
+	}
 }

@@ -1,7 +1,11 @@
 package com.sinabro.sinabro.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SurveyRepository extends JpaRepository<com.sinabro.sinabro.entity.Survey, Long> {
+import com.sinabro.sinabro.entity.Survey;
 
+public interface SurveyRepository extends JpaRepository<Survey, Long> {
+	Optional<Survey> findSurveyByUrl(String url);
 }
