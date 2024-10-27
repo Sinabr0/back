@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/surveys")
+@RequestMapping("/sinabro/api/v1/surveys")
 public class SurveyController {
 
 	private final SurveyService surveyService;
