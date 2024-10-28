@@ -35,7 +35,7 @@ public class SurveyService {
 	public SurveyResponse createSurvey(SurveyRequest surveyRequest) {
 		Survey survey = Survey.builder()
 			.creatorName(surveyRequest.creatorName())
-			.url(generateSurveyUrl())
+			.url(generateSurveyUUID())
 			.createdAt(LocalDateTime.now())
 			.build();
 		survey = surveyRepository.save(survey);
@@ -49,13 +49,16 @@ public class SurveyService {
 				.build();
 			creatorRepository.save(creator);
 		}
-		return SurveyResponse.from(survey);
+		return SurveyResponse.from(generateSurveyUrl(survey.getUrl()));
 	}
 
-	private String generateSurveyUrl() {
-		return baseUrl + UUID.randomUUID().toString().replace("-", "").substring(0, 5); // 5자리 문자열
+	private String generateSurveyUrl(String uuid) {
+		return baseUrl + uuid;
 	}
 
+	private String generateSurveyUUID() {
+		return UUID.randomUUID().toString().replace("-", "").substring(0, 5);
+	}
 	public SurveyRequest getSurveyAnswers(String uuid) {
 		Survey survey = surveyRepository.findSurveyByUrl(uuid)
 			.orElseThrow(() -> new IllegalArgumentException("등록되지 않은 설문지 입니다."));
