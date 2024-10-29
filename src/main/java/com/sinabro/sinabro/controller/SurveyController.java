@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sinabro.sinabro.entity.request.SurveyRequest;
 import com.sinabro.sinabro.entity.response.SubmitterResultResponse;
+import com.sinabro.sinabro.entity.response.SubmitterScoreResponse;
 import com.sinabro.sinabro.entity.response.SurveyResponse;
 import com.sinabro.sinabro.service.SurveyService;
 
@@ -44,7 +45,7 @@ public class SurveyController {
 
 	@Operation(summary = "설문지에 대한 응답 제출", description = "설문지에 대한 응답 제출")
 	@PostMapping("/{uuid}/submission")
-	public void createSubmission(@Valid @RequestBody SurveyRequest request, @PathVariable String uuid ) {
-		surveyService.createSubmission(request, uuid);
+	public SubmitterScoreResponse createSubmission(@Valid @RequestBody SurveyRequest request, @PathVariable String uuid ) {
+		return surveyService.createSubmission(request, uuid);
 	}
 }

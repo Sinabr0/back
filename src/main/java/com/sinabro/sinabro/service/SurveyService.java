@@ -15,6 +15,7 @@ import com.sinabro.sinabro.entity.Submitter;
 import com.sinabro.sinabro.entity.Survey;
 import com.sinabro.sinabro.entity.request.SurveyRequest;
 import com.sinabro.sinabro.entity.response.SubmitterResultResponse;
+import com.sinabro.sinabro.entity.response.SubmitterScoreResponse;
 import com.sinabro.sinabro.entity.response.SurveyResponse;
 import com.sinabro.sinabro.repository.CreatorRepository;
 import com.sinabro.sinabro.repository.SubmitterRepository;
@@ -81,7 +82,7 @@ public class SurveyService {
 		return SubmitterResultResponse.of(survey.getCreatorName(), submitterInfoList);
 	}
 
-	public void createSubmission(SurveyRequest request, String uuid) {
+	public SubmitterScoreResponse createSubmission(SurveyRequest request, String uuid) {
 		Survey survey = surveyRepository.findSurveyByUrl(uuid)
 			.orElseThrow(() -> new IllegalArgumentException("등록되지 않은 설문지 입니다."));
 
@@ -105,5 +106,7 @@ public class SurveyService {
 			.build();
 
 		submitterRepository.save(submitter);
+
+		return SubmitterScoreResponse.from(submitter.getScore());
 	}
 }
